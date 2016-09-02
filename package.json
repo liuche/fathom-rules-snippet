@@ -1,0 +1,16 @@
+{
+  "name": "fathom-server",
+  "version": "1.0.0",
+  "description": "A quick server for parsing out web content into JSON form using Fathom",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "liuche@mozilla.com",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "fathom-web": "^1.1.2",
+    "jsdom": "^7.0.0",
+    "request": "^2.74.0"
+  }
+}
