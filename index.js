@@ -39,16 +39,26 @@ var rules = {
 };
 
 var arg = process.argv[2];
-var res = {};
-request(arg, function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-    for (var flavor_property in rules) {
-      var flavor_type = flavor_property + 'y';
-      var node = rules[flavor_property].score(jsdom.jsdom(body)).max(flavor_type);
-      var property_value = node.flavors.get(flavor_type);
-      res[flavor_property] = property_value;
+if (arg) {
+  var res = {};
+  request(arg, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      for (var flavor_property in rules) {
+
+        try {
+          var flavor_type = flavor_property + 'y';
+          var node = rules[flavor_property].score(jsdom.jsdom(body)).max(flavor_type);
+          var property_value = node.flavors.get(flavor_type);
+          res[flavor_property] = property_value;
+        } catch (err) {
+          console.log("Couldn't find " + flavor_property);
+        }
+      }
     }
-  }
-  console.log(res);
-});
+    console.log(res);
+    process.exit(0);
+  });
+} else {
+  console.log("No url supplied.");
+}
 
